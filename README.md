@@ -2,13 +2,13 @@
 #### with additional help with ChatGPT for building the code (yes, I know, I'm lazy AF)
 ---
 
-### ABOUT THIS APP:
+### About This Tool:
 * This app will help you quickly and easily backup your GMod's `data` folder without digging through all of the files and folders.
 
 
 ---
-### NOTICE:
-* You **must** run this application as Administrator in order to perform the backup, otherwise, it won't work correctly.
+### Notice:
+* You **must** run this application as Administrator in order to perform some backups, otherwise, it won't work correctly.
     * If you are uncomfortable with this, then please **do not** run this tool.
 * If you are okay with this though:
     * Right click on `backup-gmod-data.exe`, and click on `Run as administrator`.
