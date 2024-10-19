@@ -1,0 +1,344 @@
+Backup started at: 10-19-2024-13-29-07
+Source: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data
+Destination: backup-10-19-2024-13-29-07
+
+Created folder: backup-10-19-2024-13-29-07\advancedtoolgun
+Created folder: backup-10-19-2024-13-29-07\advdupe2
+Created folder: backup-10-19-2024-13-29-07\advremover
+Created folder: backup-10-19-2024-13-29-07\ants_server_enhancements
+Created folder: backup-10-19-2024-13-29-07\arccw_presets
+Created folder: backup-10-19-2024-13-29-07\background_npcs
+Created folder: backup-10-19-2024-13-29-07\blueprints2
+Created folder: backup-10-19-2024-13-29-07\cache
+Created folder: backup-10-19-2024-13-29-07\cpuchip
+Created folder: backup-10-19-2024-13-29-07\custom_chat
+Created folder: backup-10-19-2024-13-29-07\decentvehicle
+Created folder: backup-10-19-2024-13-29-07\e2files
+Created folder: backup-10-19-2024-13-29-07\easychat
+Created folder: backup-10-19-2024-13-29-07\elevators
+Created folder: backup-10-19-2024-13-29-07\expression2
+Created folder: backup-10-19-2024-13-29-07\fpgachip
+Created folder: backup-10-19-2024-13-29-07\gminimap
+Created folder: backup-10-19-2024-13-29-07\gpuchip
+Created folder: backup-10-19-2024-13-29-07\gredwitch_base_cache
+Created folder: backup-10-19-2024-13-29-07\hitnumbers
+Created folder: backup-10-19-2024-13-29-07\hl2hud
+Created folder: backup-10-19-2024-13-29-07\materialurl_materials
+Created folder: backup-10-19-2024-13-29-07\nnt-antiafk
+Created folder: backup-10-19-2024-13-29-07\notepad
+Created folder: backup-10-19-2024-13-29-07\ogl
+Created folder: backup-10-19-2024-13-29-07\p2m
+Created folder: backup-10-19-2024-13-29-07\p2m_cache
+Created folder: backup-10-19-2024-13-29-07\pac3
+Created folder: backup-10-19-2024-13-29-07\pac3_cache
+Created folder: backup-10-19-2024-13-29-07\saved_vehicles
+Created folder: backup-10-19-2024-13-29-07\sf_filedata
+Created folder: backup-10-19-2024-13-29-07\sf_filedatatemp
+Created folder: backup-10-19-2024-13-29-07\soundlists
+Created folder: backup-10-19-2024-13-29-07\spuchip
+Created folder: backup-10-19-2024-13-29-07\starfall
+Created folder: backup-10-19-2024-13-29-07\stormfox
+Created folder: backup-10-19-2024-13-29-07\stormfox2
+Created folder: backup-10-19-2024-13-29-07\streamradio
+Created folder: backup-10-19-2024-13-29-07\svmod
+Created folder: backup-10-19-2024-13-29-07\trackassembly
+Created folder: backup-10-19-2024-13-29-07\ulib
+Created folder: backup-10-19-2024-13-29-07\ulx
+Created folder: backup-10-19-2024-13-29-07\ulx_logs
+Created folder: backup-10-19-2024-13-29-07\vcmod
+Created folder: backup-10-19-2024-13-29-07\vrmod
+Created folder: backup-10-19-2024-13-29-07\wire_extras
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\ad2temp.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\aritzddsettings.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\cbhtrainscontrolsv3.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\custom_loadout.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\gb-radial-config-tools_2014.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\gb-radial-config_2014.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\gb-radial-tool-presets_2014.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\gredwitch_base_config_sv.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\lvs_hud_settings.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\materialurl_favorites.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\notepad.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\pac_webaudio2_blankhtml.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\scarcam.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\scarhud.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\scarkeybindings.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\scarradiochannels.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\scar_errorlog_sv.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\sf_buffer.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\sf_perms2_cl.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\sf_perms2_sv.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\smartsnap_offsets_custom.png
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\zippygore3_saved_cvars.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advancedtoolgun\favorites.json
+Created folder: backup-10-19-2024-13-29-07\advdupe2\compact vehicle hud and lights
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\airport.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\airportbently.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\artillery cannon.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\atc tower.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\aux train engine.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\aux train engine_001.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\aux train engine_002.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\basement.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\bomb pop train engine.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\bomb pop v2.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\bomb pop v2_001.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\box car.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\box trailer semi.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\box trailer semi_001.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\building 2.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\building.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\coach.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\coach5.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\colorado_s19_banner.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\flatbed trailer semi.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\gondola.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\helper engine.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\helper engine_001.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\hopper.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\limited power.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\new box semi trailer.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\new box semi trailer_001.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\new box semi trailer_002.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\plug light.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\popcicle train car passenger.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\popcicle train engine couple.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\popcicle train engine couple_001.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\popcicle train engine couple_002.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\popcicle train engine rsg.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\popcicle train engine.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\popcicle train engine_001.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\popcicle train engine_002.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\popcicle train engine_003.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\popcicle train engine_004.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\popcicle train engine_005.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\popcicle train engine_006.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\popcicle train engine_007.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\popcicle train engine_008.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\popcicle train engine_009.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\popcicle train engine_010.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\popcicle train engine_011.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\popcicle train engine_012.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\popcicle train engine_013.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\popcicle train engine_014.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\popcicle train engine_015.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\power level test_001.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\respawn chamber with security measures.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\rewheeler.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\road work sign.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\runway numbers.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\runway.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\save.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\subzero_grand_arena_v6.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\tanker.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\taxiway dual turn.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\taxiway single turn.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\trailer jack.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\truck n trailer.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\vehicle lights and hud.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\vehicle lights and hud_001.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\vehicle lights and hud_002.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\vehicle lights and hud_003.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\wallhack.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\waste removal facility.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\waste removal facility_001.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\waste removal facility_002.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\waste removal facility_003.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\compact vehicle hud and lights\v1.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\advdupe2\compact vehicle hud and lights\v2.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\ants_server_enhancements\renderdistance.txt
+Created folder: backup-10-19-2024-13-29-07\arccw_presets\arccw_g18
+Created folder: backup-10-19-2024-13-29-07\arccw_presets\arccw_go_m249para
+Created folder: backup-10-19-2024-13-29-07\arccw_presets\arccw_go_mac10
+Created folder: backup-10-19-2024-13-29-07\arccw_presets\arccw_go_mag7
+Created folder: backup-10-19-2024-13-29-07\arccw_presets\arccw_go_mp5
+Created folder: backup-10-19-2024-13-29-07\arccw_presets\arccw_go_negev
+Created folder: backup-10-19-2024-13-29-07\arccw_presets\arccw_go_p90
+Created folder: backup-10-19-2024-13-29-07\arccw_presets\arccw_go_scar
+Created folder: backup-10-19-2024-13-29-07\arccw_presets\arccw_go_taser
+Created folder: backup-10-19-2024-13-29-07\arccw_presets\arccw_minigun
+Created folder: backup-10-19-2024-13-29-07\arccw_presets\arccw_rpg7
+Created folder: backup-10-19-2024-13-29-07\arccw_presets\arccw_uc_usp
+Created folder: backup-10-19-2024-13-29-07\arccw_presets\arccw_ud_870
+Created folder: backup-10-19-2024-13-29-07\arccw_presets\arccw_ud_glock
+Created folder: backup-10-19-2024-13-29-07\arccw_presets\arccw_ud_m1014
+Created folder: backup-10-19-2024-13-29-07\arccw_presets\arccw_ud_m16
+Created folder: backup-10-19-2024-13-29-07\arccw_presets\arccw_ud_m79
+Created folder: backup-10-19-2024-13-29-07\arccw_presets\arccw_ud_mini14
+Created folder: backup-10-19-2024-13-29-07\arccw_presets\arccw_ud_uzi
+Created folder: backup-10-19-2024-13-29-07\arccw_presets\arccw_ur_329
+Created folder: backup-10-19-2024-13-29-07\arccw_presets\arccw_ur_ak
+Created folder: backup-10-19-2024-13-29-07\arccw_presets\arccw_ur_aw
+Created folder: backup-10-19-2024-13-29-07\arccw_presets\arccw_ur_db
+Created folder: backup-10-19-2024-13-29-07\arccw_presets\arccw_ur_deagle
+Created folder: backup-10-19-2024-13-29-07\arccw_presets\arccw_ur_m1911
+Created folder: backup-10-19-2024-13-29-07\arccw_presets\arccw_ur_mp5
+Created folder: backup-10-19-2024-13-29-07\arccw_presets\arccw_ur_spas12
+Created folder: backup-10-19-2024-13-29-07\arccw_presets\arccw_welrod
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_g18\autosave.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_go_m249para\autosave.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_go_mac10\autosave.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_go_mag7\autosave.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_go_mp5\autosave.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_go_negev\autosave.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_go_p90\autosave.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_go_scar\autosave.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_go_taser\autosave.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_minigun\autosave.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_rpg7\autosave.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_uc_usp\autosave.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_ud_870\autosave.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_ud_glock\autosave.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_ud_glock\custom.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_ud_glock\dogshit.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_ud_m1014\autosave.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_ud_m16\autosave.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_ud_m16\loadout 1.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_ud_m79\autosave.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_ud_mini14\autosave.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_ud_uzi\autosave.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_ud_uzi\preset 1.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_ud_uzi\stock.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_ur_329\autosave.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_ur_ak\akm 1.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_ur_ak\autosave.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_ur_ak\default.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_ur_aw\autosave.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_ur_aw\awp 1.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_ur_aw\default.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_ur_db\autosave.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_ur_deagle\autosave.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_ur_deagle\deagle 1.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_ur_deagle\default.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_ur_m1911\autosave.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_ur_mp5\autosave.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_ur_mp5\creation.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_ur_spas12\autosave.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\arccw_presets\arccw_welrod\autosave.json
+Created folder: backup-10-19-2024-13-29-07\background_npcs\nodes
+Created folder: backup-10-19-2024-13-29-07\background_npcs\seats
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\background_npcs\poll.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\background_npcs\version.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\background_npcs\nodes\gm_bigcity.dat
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\background_npcs\nodes\gm_bigcity_improved.dat
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\background_npcs\nodes\gm_bigcity_sh.dat
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\background_npcs\nodes\gm_construct.dat
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\background_npcs\nodes\gm_liminal_space.dat
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\background_npcs\nodes\gm_ploschadka.dat
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\background_npcs\nodes\rp_bangclaw.dat
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\background_npcs\nodes\rp_southside.dat
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\background_npcs\nodes\rp_southside_day.dat
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\background_npcs\seats\gm_bigcity_improved.dat
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\background_npcs\seats\gm_construct.dat
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\background_npcs\seats\gm_ploschadka.dat
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\background_npcs\seats\rp_southside.dat
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\background_npcs\seats\rp_southside_day.dat
+Created folder: backup-10-19-2024-13-29-07\blueprints2\server
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\blueprints2\server\__users.txt
+Created folder: backup-10-19-2024-13-29-07\cache\drawutils
+Created folder: backup-10-19-2024-13-29-07\cpuchip\e2shared
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\cpuchip\_autosave_.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\cpuchip\_shutdown_.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\cpuchip\_tabs_.txt
+Created folder: backup-10-19-2024-13-29-07\custom_chat\themes
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\custom_chat\client_config.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\custom_chat\themes\custom 1.json
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\decentvehicle\gm_bigcity.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\decentvehicle\gm_bigcity_improved.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\decentvehicle\gm_ploschadka.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\decentvehicle\version.txt
+Created folder: backup-10-19-2024-13-29-07\easychat\emojis
+Created folder: backup-10-19-2024-13-29-07\easychat\history
+Created folder: backup-10-19-2024-13-29-07\easychat\macros
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\easychat\possize.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\easychat\tabs.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\easychat\transliteration_lookup.json
+Created folder: backup-10-19-2024-13-29-07\easychat\emojis\steam
+Created folder: backup-10-19-2024-13-29-07\easychat\emojis\twemojis
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\easychat\emojis\steam\steam_emoticons.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\easychat\emojis\twemojis\twemojis.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\easychat\history\admin_history.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\easychat\history\global_history.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\easychat\macros\drop.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\easychat\macros\eyefuck.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\easychat\macros\rainbow.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\easychat\macros\reee.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\elevators\gm_bigcity_improved.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\elevators\gm_boreas.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\elevators\gm_flatgrass.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\elevators\gm_omegagrass.txt
+Created folder: backup-10-19-2024-13-29-07\expression2\e2shared
+Created folder: backup-10-19-2024-13-29-07\expression2\magspack2
+Created folder: backup-10-19-2024-13-29-07\expression2\tests
+Created folder: backup-10-19-2024-13-29-07\expression2\vehicle_huds
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\blackhole's_keypad_hacker.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\coach_rolling_sound_e2_(by_az).txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\doorsholoauto.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\egp_wallhack.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\fbd_fender_bender_defender_v2.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\gsg_gauge_freight_speedometer.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\hydrauliccontrolsystem.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\lights.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\list_all_e2_on_the_server.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\power_level.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\power_stat_display.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\quarterback_ai.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\rainbow_physgun.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\speed_hud_and_warner.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\text_jazzlok.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\track_finder.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\train_controller.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\vehicle_hud.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\vehicle_hud_(1080_monitor).txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\vehicle_hud_(1080_monitor)_configuarate.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\vehicle_hud_(dukes).txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\vehicle_hud_(train).txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\_autosave_.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\_helloworld_.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\_shutdown_.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\_tabs_.txt
+Created folder: backup-10-19-2024-13-29-07\expression2\magspack2\monk
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\magspack2\monk\headsplight.txt
+Created folder: backup-10-19-2024-13-29-07\expression2\tests\regressions
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\tests\parsing.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\tests\strict.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\tests\regressions\1975.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\tests\regressions\2388.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\tests\regressions\2403.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\tests\regressions\2420.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\tests\regressions\2465.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\tests\regressions\2481.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\vehicle_huds\vehicle_hud_(1080_monitor).txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\expression2\vehicle_huds\vehicle_hud_(dukes).txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\fpgachip\_helloworld_.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\gminimap\config.json
+Created folder: backup-10-19-2024-13-29-07\gpuchip\e2shared
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\gpuchip\_autosave_.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\gpuchip\_shutdown_.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\gpuchip\_tabs_.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\gredwitch_base_cache\gredwitchs_base_update_released.png
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\gredwitch_base_cache\steamgroup.png
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\hitnumbers\settings.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\hl2hud\current.dat
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\materialurl_materials\.png
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\nnt-antiafk\antiafkconfig.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\notepad\note.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\ogl\sv_loadingurl.txt
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\p2m_cache\1192389105.dat
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\p2m_cache\1196334126.dat
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\p2m_cache\1218805032.dat
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\p2m_cache\1312122725.dat
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\p2m_cache\1373973182.dat
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\p2m_cache\1374025021.dat
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\p2m_cache\1377514847.dat
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\p2m_cache\1499772364.dat
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\p2m_cache\1627580253.dat
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\p2m_cache\1657065970.dat
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\p2m_cache\1665387628.dat
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\p2m_cache\1721832846.dat
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\p2m_cache\1781185186.dat
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\p2m_cache\1799146202.dat
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\p2m_cache\181218128.dat
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\p2m_cache\1833165036.dat
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\p2m_cache\1835015499.dat
+Copied file: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data\p2m_cache\1836424246.dat
