@@ -11,11 +11,11 @@
 * You **must** run this application as Administrator in order to perform the backup, otherwise, it won't work correctly.
     * If you are uncomfortable with this, then please **do not** run this tool.
 * If you are okay with this though:
-    * Right click on `[NULL]`, and click on `Run as administrator`.
+    * Right click on `[No binary yet]`, and click on `Run as administrator`.
 
 ---
 ### how to use:
-1. Run `[NULL]` as 'Administrator'
+1. Run `[No binary yet]` as 'Administrator'
 2. (optional) Select your GMod's `data` directory
 3. Select the folder you wish to backup the data to (e.g. `C:\Users\<your username>\Documents\gmod-data-folder-backups\`)
 4. Press `Create backup`
