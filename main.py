@@ -51,6 +51,7 @@ if True:
         import sys
         import json
         import traceback
+        import zipfile
         from PyQt5 import QtWidgets, QtCore
         from PyQt5.QtWidgets import QFileDialog, QMessageBox, QProgressBar, QCheckBox, QTextEdit, QLineEdit, QLabel, QPushButton, QVBoxLayout, QHBoxLayout, QDialog, QDialogButtonBox
         from PyQt5.QtGui import QIcon
@@ -78,7 +79,8 @@ if True:
                 return {
                     "backup_folder_format": "backup-{date}-{time}",
                     "size_restriction": True,
-                    "enable_logging": False  # New setting for logging
+                    "enable_logging": False,  # New setting for logging
+                    "compress_backup": False  # New setting for compressing the backup
                 }
             except json.JSONDecodeError as json_error:
                 print(f"Error loading settings: {json_error}")
@@ -134,7 +136,7 @@ if True:
                 return None
 
         # Function to create a backup with progress tracking and logging
-        def create_backup(source_folder, destination_folder, progress_bar, log_textedit, show_log, backup_folder_format, size_restriction, enable_logging):
+        def create_backup(source_folder, destination_folder, progress_bar, log_textedit, show_log, backup_folder_format, size_restriction, enable_logging, compress_backup):
             try:
                 print("Starting backup process...")
                 print(f"Source folder: {source_folder}")
@@ -221,6 +223,17 @@ if True:
                         progress = int((files_copied / total_files) * 100)
                         progress_bar.setValue(progress)
 
+                # Compress the backup into a .zip file if enabled
+                if compress_backup:
+                    zip_filename = f"{backup_path}.zip"
+                    print(f"Compressing backup to: {zip_filename} (The application may freeze briefly...)")
+                    with zipfile.ZipFile(zip_filename, 'w', zipfile.ZIP_DEFLATED) as zipf:
+                        for root, dirs, files in os.walk(backup_path):
+                            for file in files:
+                                file_path = os.path.join(root, file)
+                                zipf.write(file_path, os.path.relpath(file_path, backup_path))
+                    print(f"Backup compressed successfully to: {zip_filename}")
+
                 # Write completion message to log if logging is enabled
                 if log_file:
                     with open(log_file, 'a') as f:
@@ -248,7 +261,7 @@ if True:
                 print("Initializing Settings Dialog...")
                 self.settings = settings
                 self.setWindowTitle("Additional Backup Settings")
-                self.setGeometry(300, 300, 400, 150)
+                self.setGeometry(300, 300, 400, 180)
 
                 # Folder name format label and input
                 self.label_format = QLabel("Backup folder name format:")
@@ -264,6 +277,10 @@ if True:
                 self.enable_logging_checkbox = QCheckBox("Enable logging folder", self)
                 self.enable_logging_checkbox.setChecked(self.settings['enable_logging'])
 
+                # Compress backup option checkbox
+                self.compress_backup_checkbox = QCheckBox("Compress backup into .zip file", self)
+                self.compress_backup_checkbox.setChecked(self.settings['compress_backup'])
+
                 # OK and Cancel buttons
                 self.button_box = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel, self)
                 self.button_box.accepted.connect(self.accept)
@@ -276,6 +293,7 @@ if True:
                 layout.addWidget(self.label_format_guide)
                 layout.addWidget(self.size_restriction_checkbox)
                 layout.addWidget(self.enable_logging_checkbox)
+                layout.addWidget(self.compress_backup_checkbox)
                 layout.addWidget(self.button_box)
                 self.setLayout(layout)
 
@@ -285,6 +303,7 @@ if True:
                 self.settings['backup_folder_format'] = self.input_format.text()
                 self.settings['size_restriction'] = self.size_restriction_checkbox.isChecked()
                 self.settings['enable_logging'] = self.enable_logging_checkbox.isChecked()  # Save the logging setting
+                self.settings['compress_backup'] = self.compress_backup_checkbox.isChecked()  # Save the compress backup setting
                 save_settings(self.settings)  # Save settings to JSON
                 print("Settings updated and saved successfully.")
                 super().accept()
@@ -301,11 +320,51 @@ if True:
                 # Window properties
                 self.setWindowTitle("GMod Data Backup Tool")
                 self.setGeometry(300, 300, 400, 100)
-                self.setWindowIcon(QIcon('GMODICON.ico'))
+                self.setWindowIcon(QIcon(r'assets\GMODICON.ico'))
 
                 # Hard-Coded directories
                 default_source_directory = r"C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data"
                 default_dest_directory = r"C:\GMod-Data-Backups"
+
+                # Set embedded stylesheet for the entire application
+                self.setStyleSheet("""
+                    QLabel {
+                        font-size: 14px;
+                        font-family: Arial, sans-serif;
+                        color: #333333;
+                    }
+                    QLineEdit {
+                        border: 2px solid #999999;
+                        border-radius: 5px;
+                        padding: 5px;
+                        font-size: 12px;
+                        background-color: #f9f9f9;
+                    }
+                    QPushButton {
+                        background-color: #0078D7;
+                        color: white;
+                        border-radius: 5px;
+                        padding: 8px 12px;
+                    }
+                    QPushButton:hover {
+                        background-color: #005A9E;
+                    }
+                    QProgressBar {
+                        text-align: center;
+                        font-size: 12px;
+                        height: 20px;
+                    }
+                    QCheckBox {
+                        font-size: 12px;
+                        color: #555555;
+                    }
+                    QTextEdit {
+                        border: 1px solid #CCCCCC;
+                        background-color: #f1f1f1;
+                        font-family: "Courier New", Courier, monospace;
+                    }
+                """
+                )
 
                 # Create a menu bar (using QMainWindow's menuBar method)
                 self.menu_bar = self.menuBar()
@@ -336,7 +395,7 @@ if True:
                 self.input_source = QtWidgets.QLineEdit(self)
                 self.input_source.setText(default_source_directory)  # Set default value
                 self.input_dest = QtWidgets.QLineEdit(self)
-                self.input_dest.setText(default_dest_directory) # Set default value
+                self.input_dest.setText(default_dest_directory)  # Set default value
 
                 # Browse buttons
                 self.btn_browse_source = QtWidgets.QPushButton("Browse", self)
@@ -411,6 +470,7 @@ if True:
                 self.show_log_checkbox.stateChanged.connect(self.toggle_log_visibility)
 
 
+
             def browse_source_folder(self):
                 print("Browsing for source folder...")
                 folder = QFileDialog.getExistingDirectory(self, "Select Source Folder")
@@ -468,7 +528,7 @@ if True:
                     self.progress_bar.setValue(0)  # Reset progress bar
                     QtCore.QCoreApplication.processEvents()  # Force UI update before starting
                     show_log = self.show_log_checkbox.isChecked()  # Check if log is enabled
-                    create_backup(self.input_source.text(), self.input_dest.text(), self.progress_bar, self.log_textedit, show_log, self.settings['backup_folder_format'], self.settings['size_restriction'], self.settings['enable_logging'])
+                    create_backup(self.input_source.text(), self.input_dest.text(), self.progress_bar, self.log_textedit, show_log, self.settings['backup_folder_format'], self.settings['size_restriction'], self.settings['enable_logging'], self.settings['compress_backup'])
 
             # Update the `start_backup` function to show the dialog when admin privileges are not detected
             def start_backup(self):
@@ -489,7 +549,7 @@ if True:
                     self.progress_bar.setValue(0)  # Reset progress bar
                     QtCore.QCoreApplication.processEvents()  # Force UI update before starting
                     show_log = self.show_log_checkbox.isChecked()  # Check if log is enabled
-                    create_backup(source_folder, destination_folder, self.progress_bar, self.log_textedit, show_log, self.settings['backup_folder_format'], self.settings['size_restriction'], self.settings['enable_logging'])
+                    create_backup(source_folder, destination_folder, self.progress_bar, self.log_textedit, show_log, self.settings['backup_folder_format'], self.settings['size_restriction'], self.settings['enable_logging'], self.settings['compress_backup'])
 
             def open_settings(self):
                 print("Opening settings dialog...")
@@ -528,47 +588,115 @@ if True:
                 self.setWindowTitle("About")
                 self.setGeometry(300, 300, 700, 500)
 
-                # Add your about information here
-                about_label = QtWidgets.QLabel("This is the About dialog for the GMod Data Backup Tool.")
-                about_label.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop)  # Align to top-left
+                # Create a QLabel with the version number
+                version_label = QtWidgets.QLabel("v1.0.0-beta   (Python build)")
+                version_label.setAlignment(QtCore.Qt.AlignRight)  # Align to the right
+                
+                # Create a QLabel with rich text to display the README contents
+                readme_content = r"""
+                <h1>Thank you for your interest in this tool...application...whatever it is!</h1>
+                <h4>with additional help with ChatGPT for building the code (yes, I know, I'm lazy AF)</h4>
+                <hr>
 
-                # SVG Widgets
-                gpl_svg_widget = QSvgWidget("gpl-v3-logo.svg")
-                gpl_svg_widget.setFixedSize(70, 70)  # Set the desired size for the SVG
-                pyqt_svg_widget = QSvgWidget("Python_and_Qt.svg")
-                pyqt_svg_widget.setFixedSize(70, 70)  # Set the desired size for the SVG
+                <h3>ABOUT THIS APP:</h3>
+                <ul>
+                <li>This app will help you quickly and easily backup your GMod's <code>data</code> folder without digging through all of the files and folders.</li>
+                </ul>
 
-                # Create a close button
-                close_button = QtWidgets.QPushButton("Close")
-                close_button.clicked.connect(self.close)
+                <hr>
 
-                # Main Layout
-                main_layout = QtWidgets.QVBoxLayout()
+                <h3>NOTICE:</h3>
+                <ul>
+                <li>You <strong>must</strong> run this application as Administrator in order to perform the backup, otherwise, it won't work correctly.</li>
+                <li>If you are uncomfortable with this, then please <strong>do not</strong> run this tool.</li>
+                <li>If you are okay with this though:</li>
+                <ul>
+                    <li>Right click on <code>backup-gmod-data.exe</code>, and click on <strong>Run as administrator</strong>.</li>
+                </ul>
+                </ul>
 
-                # Top-left label
-                top_layout = QtWidgets.QVBoxLayout()
-                top_layout.addWidget(about_label)
-                top_layout.addStretch()  # Spacer to push the content to the top
+                <hr>
 
-                # Horizontal layout for the SVGs at the bottom-right
+                <h3>How to use:</h3>
+                <ol>
+                <li>Run <code>backup-gmod-data.exe</code> as 'Administrator'</li>
+                <li>(optional) Select your GMod's <code>data</code> directory</li>
+                <li>Select the folder you wish to backup the data to (e.g. <code>C:\Users\&lt;your username&gt;\Documents\gmod-data-folder-backups\</code>)</li>
+                <li>Press <strong>Create backup</strong></li>
+                <li>Close app once done</li>
+                </ol>
+
+                <hr>
+
+                <h3>Disclaimer:</h3>
+                <p>This software is provided on an "as is" basis, without any warranties or guarantees of any kind, either express or implied. By downloading or using this software, you acknowledge that it is new and may contain bugs or issues that could pose risks to your data and system.</p>
+                <p>We do <strong>not</strong> accept any liability for any data loss, damage, or corruption that may occur as a result of using this software, including during the backup process. You are solely responsible for any actions taken while using this software, and you agree to assume all associated risks.</p>
+                <p>By proceeding with the download and use of this software, you agree to these terms and confirm that you understand the potential risks involved.</p>
+
+                <hr>
+
+                <h3>Software Credits:</h3>
+                <ul>
+                <li><strong>Thethirdpuddle</strong>: for the general idea of this software and most of the <code>README.md</code> contents.</li>
+                <li><strong>ChatGPT</strong>: For help with building the code and refining the disclaimer.</li>
+                </ul>
+
+                <!-- Extra space at the end -->
+                <div style="height: 50px;"></div>
+                """
+
+                # Create a QLabel to display the README contents
+                about_label = QtWidgets.QLabel(readme_content)
+                about_label.setWordWrap(True)
+                about_label.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop)
+                about_label.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)  # Allows text selection
+
+                # Create SVG widgets for images
+                gpl_svg_widget = QSvgWidget(r"assets\gpl-v3-logo.svg")
+                gpl_svg_widget.setFixedSize(90, 90)
+                pyqt_svg_widget = QSvgWidget(r"assets\Python_and_Qt.svg")
+                pyqt_svg_widget.setFixedSize(85, 85)
+
+                # Layout for README content and SVG images
+                scroll_content_layout = QtWidgets.QVBoxLayout()
+                scroll_content_layout.addWidget(about_label)
+
+                # Horizontal layout for SVG images inside the scroll area
                 svg_layout = QtWidgets.QHBoxLayout()
-                svg_layout.addStretch()  # Spacer to push SVGs to the right
+                svg_layout.addStretch()
                 svg_layout.addWidget(gpl_svg_widget)
                 svg_layout.addWidget(pyqt_svg_widget)
 
-                # Layout for the close button
-                close_button_layout = QtWidgets.QHBoxLayout()
-                close_button_layout.addStretch()  # Spacer to push close button to the right
-                close_button_layout.addWidget(close_button)
+                # Add SVG layout to the scrollable area
+                scroll_content_layout.addLayout(svg_layout)
 
-                # Add everything to the main layout
-                main_layout.addLayout(top_layout)
-                main_layout.addStretch()  # Push SVGs and button to the bottom
-                main_layout.addLayout(svg_layout)
-                main_layout.addLayout(close_button_layout)
+                # Create a widget to hold the content inside the scroll area
+                scroll_content_widget = QtWidgets.QWidget()
+                scroll_content_widget.setLayout(scroll_content_layout)
+
+                # Create a QScrollArea to make the content scrollable
+                scroll_area = QtWidgets.QScrollArea()
+                scroll_area.setWidgetResizable(True)  # Allow the content to resize with the window
+                scroll_area.setWidget(scroll_content_widget)
+
+                # Close button
+                close_button = QtWidgets.QPushButton("Close")
+                close_button.clicked.connect(self.close)
+
+                # Layout for the close button and version label
+                button_version_layout = QtWidgets.QHBoxLayout()
+                button_version_layout.addWidget(version_label)  # Version label on the left
+                button_version_layout.addStretch()
+                button_version_layout.addWidget(close_button)  # Close button on the right
+
+                # Main layout for the dialog
+                main_layout = QtWidgets.QVBoxLayout()
+                main_layout.addWidget(scroll_area)  # Add the scrollable content
+                main_layout.addLayout(button_version_layout)  # Add version and close button layout
 
                 # Set the final layout
                 self.setLayout(main_layout)
+
 
 
         # Main entry point
@@ -590,6 +718,7 @@ if True:
 
         if __name__ == "__main__":
             main()
+            print("exiting program...")
     except Exception as e:
         unex_error_type = type(e).__name__
         unex_error_code = error_codes.get(unex_error_type, "unknown")
