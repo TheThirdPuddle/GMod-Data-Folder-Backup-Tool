@@ -41,6 +41,181 @@ error_codes = {
     "GeneratorExit": 1023,
     # Add more exception types as needed
 }
+# Updated DARK_THEME
+DARK_THEME = """
+    QWidget {
+        background-color: #1E1E1E;
+        color: #DDDDDD;
+    }
+    QLabel {
+        font-size: 14px;
+        font-family: Arial, sans-serif;
+        color: #DDDDDD;
+    }
+    QLineEdit, QTextEdit {
+        border: 2px solid #666666;
+        border-radius: 5px;
+        padding: 5px;
+        font-size: 12px;
+        background-color: #333333;
+        color: #FFFFFF;
+    }
+    QPushButton {
+        background-color: #0078D7;
+        color: white;
+        border-radius: 8px;  /* Rounded buttons */
+        padding: 8px 12px;
+    }
+    QPushButton:hover {
+        background-color: #005A9E;
+    }
+    QProgressBar {
+        text-align: center;
+        font-size: 12px;
+        height: 20px;
+        background-color: #1E1E1E;
+        color: #FFFFFF;
+        border: 2px solid #FFFFFF;
+        border-radius: 8px;  /* Rounded progress bar */
+    }
+    QProgressBar::chunk {
+        background-color: #0078D7;
+        border-radius: 8px;  /* Rounded progress fill */
+    }
+    QCheckBox {
+        font-size: 12px;
+        color: #AAAAAA;
+    }
+    QComboBox {
+    text-align: center;
+    font-size: 12px;
+    height: 20px;
+    background-color: #333333;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    }
+
+    QComboBox::drop-down {
+        border: none;  /* Removes the border around the arrow */
+        width: 20px;  /* Adjust as needed */
+    }
+
+    QComboBox::down-arrow {
+        content: "▼";
+        color: #FFFFFF;
+        font-size: 10px;
+    }
+"""
+
+# Updated LIGHT_THEME
+LIGHT_THEME = """
+    QWidget {
+        background-color: #FFFFFF;
+        color: #000000;
+    }
+    QLabel {
+        font-size: 14px;
+        font-family: Arial, sans-serif;
+        color: #000000;
+    }
+    QLineEdit, QTextEdit {
+        border: 2px solid #AAAAAA;
+        border-radius: 5px;
+        padding: 5px;
+        font-size: 12px;
+        background-color: #F0F0F0;
+        color: #000000;
+    }
+    QPushButton {
+        background-color: #0078D7;
+        color: white;
+        border-radius: 8px;  /* Rounded buttons */
+        padding: 8px 12px;
+    }
+    QPushButton:hover {
+        background-color: #005A9E;
+    }
+    QProgressBar {
+        text-align: center;
+        font-size: 12px;
+        height: 20px;
+        background-color: #F0F0F0;
+        color: #000000;
+        border: 2px solid #000000;
+        border-radius: 8px;  /* Rounded progress bar */
+    }
+    QProgressBar::chunk {
+        background-color: #0078D7;
+        border-radius: 8px;  /* Rounded progress fill */
+    }
+    QCheckBox {
+        font-size: 12px;
+        color: #333333;
+    }
+    QComboBox {
+    text-align: center;
+    font-size: 12px;
+    height: 20px;
+    background-color: #F0F0F0;
+    color: #000000;
+    border: 2px solid #000000;
+    border-radius: 8px;
+    }
+
+    QComboBox::drop-down {
+        border: none;  /* Removes the border around the arrow */
+        width: 20px;  /* Adjust as needed */
+    }
+
+    QComboBox::down-arrow {
+        content: "▼";
+        color: #000000;
+        font-size: 10px;
+    }
+"""
+
+
+# Error popups
+def critical(e, allow_continue):
+    from PyQt5.QtWidgets import QMessageBox
+    import traceback
+    import sys
+    unex_error_type = type(e).__name__
+    unex_error_code = error_codes.get(unex_error_type, "unknown")
+    error_message = (
+        "An unexpected error has occurred!\n\n"
+        f"Error details:\n"
+        f"type: '{unex_error_type}'\n"
+        f"code: '{unex_error_code}'\n"
+        f"details: '{e}'"
+    )
+    if allow_continue:
+        error_message += (
+            "\n\nThe app will continue to run, but it is recommended to fix the error!"
+        )
+
+    QMessageBox.critical(
+        None,
+        "Unexpected Error",
+        error_message
+    )
+    traceback.print_exc()
+    if allow_continue:
+        print("continuing...")
+    else:
+        print("force closing app...")
+        sys.exit(1)
+
+
+def warning(title, message):
+    from PyQt5.QtWidgets import QMessageBox
+    QMessageBox.warning(
+        None,
+        title,
+        message
+    )
+
 
 if True:
     try:
@@ -52,10 +227,23 @@ if True:
         import json
         import traceback
         import zipfile
+        import folderutils
         from PyQt5 import QtWidgets, QtCore
-        from PyQt5.QtWidgets import QFileDialog, QMessageBox, QProgressBar, QCheckBox, QTextEdit, QLineEdit, QLabel, QPushButton, QVBoxLayout, QHBoxLayout, QDialog, QDialogButtonBox
+        from PyQt5.QtWidgets import QFileDialog, QMessageBox, QCheckBox, QLineEdit, QLabel, QPushButton, QVBoxLayout, QDialog, QDialogButtonBox
         from PyQt5.QtGui import QIcon
         from PyQt5.QtSvg import QSvgWidget
+
+        # Check if the script is running as a compiled binary
+        if getattr(sys, 'frozen', False):
+            build_type = "Binary Build"
+        else:
+            build_type = "Python Build"
+
+        version = f"1.1.0-beta.1 ({build_type})"
+
+        # Print the result (optional)
+        print(f"Running as: {build_type}")
+        print(f"Version: {version}")
 
         # Function to check if the script is running with admin privileges
         def is_admin():
@@ -74,13 +262,13 @@ if True:
                         settings = json.load(f)
                         print("Settings loaded successfully.")
                         return settings
-                # If the file doesn't exist, return default settings
                 print("Settings file not found. Loading default settings...")
                 return {
                     "backup_folder_format": "backup-{date}-{time}",
                     "size_restriction": True,
-                    "enable_logging": False,  # New setting for logging
-                    "compress_backup": False  # New setting for compressing the backup
+                    "enable_logging": False,
+                    "compress_backup": False,
+                    "theme": "dark"  # New theme setting, default to dark
                 }
             except json.JSONDecodeError as json_error:
                 print(f"Error loading settings: {json_error}")
@@ -94,18 +282,9 @@ if True:
                     f"Error info:\n"
                     f"type: {setting_error_type}\ncode: {setting_error_code}\ndetails: {str(json_error)}"
                 )
-            except Exception as general_error:
+            except Exception as e:
                 print(f"Unexpected error loading settings: {general_error}")
-                setting_error_type = type(general_error).__name__
-                setting_error_code = error_codes.get(setting_error_type, "unknown")
-                QtWidgets.QMessageBox.critical(
-                    None,
-                    "Unexpected Error",
-                    f"An unexpected error has occurred!\n\n"
-                    f"Error info:\n"
-                    f"type: {setting_error_type}\ncode: {setting_error_code}\ndetails: {str(general_error)}"
-                )
-            sys.exit(1)  # Exit the application after showing the error
+                critical(e, False)
 
         # Function to save settings to a JSON file
         def save_settings(settings):
@@ -116,6 +295,10 @@ if True:
                 print("Settings saved successfully.")
             except Exception as e:
                 print(f"Failed to save settings: {e}")
+
+        def apply_theme(app, settings):
+            theme = settings.get("theme", "dark")
+            app.setStyleSheet(DARK_THEME if theme == "dark" else LIGHT_THEME)
 
         # Function to create a log file if logging is enabled
         def create_log_file():
@@ -145,7 +328,7 @@ if True:
                 if not os.path.exists(source_folder):
                     print("Error: Source folder does not exist.")
                     raise FileNotFoundError("Source folder does not exist.")
-                
+
                 # Check folder size if restriction is enabled
                 if size_restriction:
                     print("Checking folder size...")
@@ -243,7 +426,7 @@ if True:
                 # Display success message
                 QMessageBox.information(None, "Backup Success", f"Backup created at: {backup_path}")
                 progress_bar.setValue(0)
-            
+
             except Exception as e:
                 backupfail_error_type = type(e).__name__
                 backupfail_error_code = error_codes.get(backupfail_error_type, "unknown")
@@ -257,7 +440,7 @@ if True:
         class SettingsDialog(QDialog):
             def __init__(self, settings, parent=None):
                 super().__init__(parent)
-                
+
                 print("Initializing Settings Dialog...")
                 self.settings = settings
                 self.setWindowTitle("Additional Backup Settings")
@@ -281,6 +464,12 @@ if True:
                 self.compress_backup_checkbox = QCheckBox("Compress backup into .zip file", self)
                 self.compress_backup_checkbox.setChecked(self.settings['compress_backup'])
 
+                # Add theme selection dropdown
+                self.theme_label = QLabel("Select Theme:")
+                self.theme_dropdown = QtWidgets.QComboBox(self)
+                self.theme_dropdown.addItems(["Dark", "Light"])
+                self.theme_dropdown.setCurrentText("Dark" if self.settings["theme"] == "dark" else "Light")
+
                 # OK and Cancel buttons
                 self.button_box = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel, self)
                 self.button_box.accepted.connect(self.accept)
@@ -294,6 +483,8 @@ if True:
                 layout.addWidget(self.size_restriction_checkbox)
                 layout.addWidget(self.enable_logging_checkbox)
                 layout.addWidget(self.compress_backup_checkbox)
+                layout.addWidget(self.theme_label)
+                layout.addWidget(self.theme_dropdown)
                 layout.addWidget(self.button_box)
                 self.setLayout(layout)
 
@@ -304,7 +495,9 @@ if True:
                 self.settings['size_restriction'] = self.size_restriction_checkbox.isChecked()
                 self.settings['enable_logging'] = self.enable_logging_checkbox.isChecked()  # Save the logging setting
                 self.settings['compress_backup'] = self.compress_backup_checkbox.isChecked()  # Save the compress backup setting
+                self.settings['theme'] = "dark" if self.theme_dropdown.currentText() == "Dark" else "light"
                 save_settings(self.settings)  # Save settings to JSON
+                QMessageBox.information(None, "Successfully saved settings!", f"Your settings have been saved successfully!\n\nYou may need to restart the application for some settings to take effect.")
                 print("Settings updated and saved successfully.")
                 super().accept()
 
@@ -316,6 +509,7 @@ if True:
                 print("Initializing Backup Application GUI...")
                 # Load settings from JSON file
                 self.settings = load_settings()
+                apply_theme(self, self.settings)
 
                 # Window properties
                 self.setWindowTitle("GMod Data Backup Tool")
@@ -324,47 +518,7 @@ if True:
 
                 # Hard-Coded directories
                 default_source_directory = r"C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data"
-                default_dest_directory = r"C:\GMod-Data-Backups"
-
-                # Set embedded stylesheet for the entire application
-                self.setStyleSheet("""
-                    QLabel {
-                        font-size: 14px;
-                        font-family: Arial, sans-serif;
-                        color: #333333;
-                    }
-                    QLineEdit {
-                        border: 2px solid #999999;
-                        border-radius: 5px;
-                        padding: 5px;
-                        font-size: 12px;
-                        background-color: #f9f9f9;
-                    }
-                    QPushButton {
-                        background-color: #0078D7;
-                        color: white;
-                        border-radius: 5px;
-                        padding: 8px 12px;
-                    }
-                    QPushButton:hover {
-                        background-color: #005A9E;
-                    }
-                    QProgressBar {
-                        text-align: center;
-                        font-size: 12px;
-                        height: 20px;
-                    }
-                    QCheckBox {
-                        font-size: 12px;
-                        color: #555555;
-                    }
-                    QTextEdit {
-                        border: 1px solid #CCCCCC;
-                        background-color: #f1f1f1;
-                        font-family: "Courier New", Courier, monospace;
-                    }
-                """
-                )
+                default_dest_directory = (str(folderutils.get_documents_folder()) + r"\GMod Data Folder Backups")
 
                 # Create a menu bar (using QMainWindow's menuBar method)
                 self.menu_bar = self.menuBar()
@@ -469,8 +623,6 @@ if True:
                 # Connect checkbox to toggle visibility and resize
                 self.show_log_checkbox.stateChanged.connect(self.toggle_log_visibility)
 
-
-
             def browse_source_folder(self):
                 print("Browsing for source folder...")
                 folder = QFileDialog.getExistingDirectory(self, "Select Source Folder")
@@ -486,51 +638,63 @@ if True:
                     self.input_dest.setText(folder)
 
             def show_admin_warning(self):
-                print("Admin privileges not detected. Showing admin warning...")
-                # Create a dialog to display the warning
-                dialog = QDialog(self)
-                dialog.setWindowTitle("Admin Privileges Required")
-                
-                # Message explaining why admin privileges are needed
-                warning_label = QLabel("This application may need to be run as an administrator to perform the backup.\n\n"
-                                    "To run as administrator:\n"
-                                    "1. Right-click the .exe file.\n"
-                                    "2. Select 'Run as administrator'.\n\n"
-                                    "Caution: Running unknown1 apps as an administrator can carry risks. "
-                                    "Only run apps you can trust with elevated privileges.", dialog)
+                try:
+                    print("Admin privileges not detected. Showing admin warning...")
+                    # Create a dialog to display the warning
+                    dialog = QDialog(self)
+                    dialog.setWindowTitle("Admin Privileges Required")
 
-                # Notice for running without admin
-                notice_label = QLabel("Warning: The backup process may not work correctly if you proceed without admin rights.", dialog)
-                
-                # Create 'Run Anyway' and 'Cancel' buttons
-                run_anyway_button = QPushButton("Run Anyway (not recommended)", dialog)
-                cancel_button = QPushButton("Cancel", dialog)
-                
-                # Button box for organizing the buttons
-                button_box = QDialogButtonBox(QtCore.Qt.Horizontal)
-                button_box.addButton(run_anyway_button, QDialogButtonBox.AcceptRole)
-                button_box.addButton(cancel_button, QDialogButtonBox.RejectRole)
+                    # Message explaining why admin privileges are needed
+                    warning_label = QLabel("This application may need to be run as an administrator to perform the backup.\n\n"
+                                        "To run as administrator:\n"
+                                        "1. Right-click the .exe file.\n"
+                                        "2. Select 'Run as administrator'.\n\n"
+                                        "Caution: Running unknown apps as an administrator can carry risks. "
+                                        "Only run apps you can trust with elevated privileges.", dialog)
 
-                # Connect buttons
-                cancel_button.clicked.connect(dialog.reject)
-                run_anyway_button.clicked.connect(dialog.accept)
+                    # Notice for running without admin
+                    notice_label = QLabel("Warning: The backup process may not work correctly if you proceed without admin rights. Continue?", dialog)
 
-                # Layout for the dialog
-                layout = QVBoxLayout(dialog)
-                layout.addWidget(warning_label)
-                layout.addWidget(notice_label)
-                layout.addWidget(button_box)
+                    # Create 'Run Anyway' and 'Cancel' buttons
+                    run_anyway_button = QPushButton("Run Anyway (not recommended)", dialog)
+                    cancel_button = QPushButton("Cancel", dialog)
 
-                # Execute the dialog and check the result
-                if dialog.exec_() == QDialog.Accepted:
-                    print("User chose to run anyway without admin privileges.")
-                    # User clicked "Run Anyway", proceed with backup
-                    self.progress_bar.setValue(0)  # Reset progress bar
-                    QtCore.QCoreApplication.processEvents()  # Force UI update before starting
-                    show_log = self.show_log_checkbox.isChecked()  # Check if log is enabled
-                    create_backup(self.input_source.text(), self.input_dest.text(), self.progress_bar, self.log_textedit, show_log, self.settings['backup_folder_format'], self.settings['size_restriction'], self.settings['enable_logging'], self.settings['compress_backup'])
+                    # Button box for organizing the buttons
+                    button_box = QDialogButtonBox(QtCore.Qt.Horizontal)
+                    button_box.addButton(run_anyway_button, QDialogButtonBox.AcceptRole)
+                    button_box.addButton(cancel_button, QDialogButtonBox.RejectRole)
 
+                    # Connect buttons
+                    cancel_button.clicked.connect(dialog.reject)
+                    run_anyway_button.clicked.connect(dialog.accept)
+
+                    # Layout for the dialog
+                    layout = QVBoxLayout(dialog)
+                    layout.addWidget(warning_label)
+                    layout.addWidget(notice_label)
+                    layout.addWidget(button_box)
+
+                    # Execute the dialog and check the result
+                    if dialog.exec_() == QDialog.Accepted:
+                        print("User chose to run anyway without admin privileges.")
+                        # User clicked "Run Anyway", proceed with backup
+                        self.progress_bar.setValue(0)  # Reset progress bar
+                        QtCore.QCoreApplication.processEvents()  # Force UI update before starting
+                        show_log = self.show_log_checkbox.isChecked()  # Check if log is enabled
+                        create_backup(self.input_source.text(), self.input_dest.text(), self.progress_bar, self.log_textedit, show_log, self.settings['backup_folder_format'], self.settings['size_restriction'], self.settings['enable_logging'], self.settings['compress_backup'])
+                except Exception as e:
+                    unex_error_type = type(e).__name__
+                    unex_error_code = error_codes.get(unex_error_type, "unknown")
+                    print(f"Error occurred: {e}")
+                    QtWidgets.QMessageBox.critical(
+                        None,
+                        "Unexpected Error",
+                        f"An unexpected error has occurred!\n\nError details:\ntype: '{unex_error_type}'\ncode: '{unex_error_code}'\ndetails: '{e}'",
+                    )
+                    traceback.print_exc()
+                    sys.exit(1)
             # Update the `start_backup` function to show the dialog when admin privileges are not detected
+
             def start_backup(self):
                 print("Start backup button clicked.")
                 source_folder = self.input_source.text()
@@ -584,120 +748,121 @@ if True:
 
         class AboutDialog(QtWidgets.QDialog):
             def __init__(self, parent=None):
-                super().__init__(parent)
-                self.setWindowTitle("About")
-                self.setGeometry(300, 300, 700, 500)
+                try:
+                    super().__init__(parent)
+                    self.setWindowTitle("About")
+                    self.setGeometry(300, 300, 700, 500)
 
-                # Create a QLabel with the version number
-                version_label = QtWidgets.QLabel("v1.0.0-beta   (Python build)")
-                version_label.setAlignment(QtCore.Qt.AlignRight)  # Align to the right
-                
-                # Create a QLabel with rich text to display the README contents
-                readme_content = r"""
-                <h1>Thank you for your interest in this tool...application...whatever it is!</h1>
-                <h4>with additional help with ChatGPT for building the code (yes, I know, I'm lazy AF)</h4>
-                <hr>
+                    # Create a QLabel with the version number
+                    version_label = QtWidgets.QLabel(str(version))
+                    version_label.setAlignment(QtCore.Qt.AlignRight)  # Align to the right
 
-                <h3>ABOUT THIS APP:</h3>
-                <ul>
-                <li>This app will help you quickly and easily backup your GMod's <code>data</code> folder without digging through all of the files and folders.</li>
-                </ul>
+                    # Create a QLabel with rich text to display the README contents
+                    readme_content = r"""
+                    <h1>Thank you for your interest in this tool...application...whatever it is!</h1>
+                    <h4>with additional help with ChatGPT for building the code (yes, I know, I'm lazy AF)</h4>
+                    <hr>
 
-                <hr>
+                    <h3>ABOUT THIS APP:</h3>
+                    <ul>
+                    <li>This app will help you quickly and easily backup your GMod's <code>data</code> folder without digging through all of the files and folders.</li>
+                    </ul>
 
-                <h3>NOTICE:</h3>
-                <ul>
-                <li>You <strong>must</strong> run this application as Administrator in order to perform the backup, otherwise, it won't work correctly.</li>
-                <li>If you are uncomfortable with this, then please <strong>do not</strong> run this tool.</li>
-                <li>If you are okay with this though:</li>
-                <ul>
-                    <li>Right click on <code>backup-gmod-data.exe</code>, and click on <strong>Run as administrator</strong>.</li>
-                </ul>
-                </ul>
+                    <hr>
 
-                <hr>
+                    <h3>NOTICE:</h3>
+                    <ul>
+                    <li>You <strong>must</strong> run this application as Administrator in order to perform the backup, otherwise, it won't work correctly.</li>
+                    <li>If you are uncomfortable with this, then please <strong>do not</strong> run this tool.</li>
+                    <li>If you are okay with this though:</li>
+                    <ul>
+                        <li>Right click on <code>backup-gmod-data.exe</code>, and click on <strong>Run as administrator</strong>.</li>
+                    </ul>
+                    </ul>
 
-                <h3>How to use:</h3>
-                <ol>
-                <li>Run <code>backup-gmod-data.exe</code> as 'Administrator'</li>
-                <li>(optional) Select your GMod's <code>data</code> directory</li>
-                <li>Select the folder you wish to backup the data to (e.g. <code>C:\Users\&lt;your username&gt;\Documents\gmod-data-folder-backups\</code>)</li>
-                <li>Press <strong>Create backup</strong></li>
-                <li>Close app once done</li>
-                </ol>
+                    <hr>
 
-                <hr>
+                    <h3>How to use:</h3>
+                    <ol>
+                    <li>Run <code>backup-gmod-data.exe</code> as 'Administrator'</li>
+                    <li>(optional) Select your GMod's <code>data</code> directory</li>
+                    <li>Select the folder you wish to backup the data to (e.g. <code>C:\Users\&lt;your username&gt;\Documents\gmod-data-folder-backups\</code>)</li>
+                    <li>Press <strong>Create backup</strong></li>
+                    <li>Close app once done</li>
+                    </ol>
 
-                <h3>Disclaimer:</h3>
-                <p>This software is provided on an "as is" basis, without any warranties or guarantees of any kind, either express or implied. By downloading or using this software, you acknowledge that it is new and may contain bugs or issues that could pose risks to your data and system.</p>
-                <p>We do <strong>not</strong> accept any liability for any data loss, damage, or corruption that may occur as a result of using this software, including during the backup process. You are solely responsible for any actions taken while using this software, and you agree to assume all associated risks.</p>
-                <p>By proceeding with the download and use of this software, you agree to these terms and confirm that you understand the potential risks involved.</p>
+                    <hr>
 
-                <hr>
+                    <h3>Disclaimer:</h3>
+                    <p>This software is provided "as is", without any warranties or guarantees of any kind, either express or implied. By downloading and/or using this software, you acknowledge that it is new and may contain bugs or issues that could cause potential data and/or system destruction.</p>
+                    <p>We do <strong>not</strong> accept any liability for any data loss, damage, or corruption that may occur as a result of using this software, including during the backup process. You are solely responsible for any actions taken while using this software, and you agree to assume all associated risks.</p>
+                    <p>By proceeding with the download and use of this software, you agree to these terms and confirm that you understand the potential risks involved.</p>
 
-                <h3>Software Credits:</h3>
-                <ul>
-                <li><strong>Thethirdpuddle</strong>: for the general idea of this software and most of the <code>README.md</code> contents.</li>
-                <li><strong>ChatGPT</strong>: For help with building the code and refining the disclaimer.</li>
-                </ul>
+                    <hr>
 
-                <!-- Extra space at the end -->
-                <div style="height: 50px;"></div>
-                """
+                    <h3>Software Credits:</h3>
+                    <ul>
+                    <li><strong>Thethirdpuddle</strong>: for the general idea of this software and most of the <code>README.md</code> contents.</li>
+                    <li><strong>ChatGPT</strong>: For help with building the code and refining the disclaimer.</li>
+                    </ul>
 
-                # Create a QLabel to display the README contents
-                about_label = QtWidgets.QLabel(readme_content)
-                about_label.setWordWrap(True)
-                about_label.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop)
-                about_label.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)  # Allows text selection
+                    <!-- Extra space at the end -->
+                    <div style="height: 50px;"></div>
+                    """
 
-                # Create SVG widgets for images
-                gpl_svg_widget = QSvgWidget(r"assets\gpl-v3-logo.svg")
-                gpl_svg_widget.setFixedSize(90, 90)
-                pyqt_svg_widget = QSvgWidget(r"assets\Python_and_Qt.svg")
-                pyqt_svg_widget.setFixedSize(85, 85)
+                    # Create a QLabel to display the README contents
+                    about_label = QtWidgets.QLabel(readme_content)
+                    about_label.setWordWrap(True)
+                    about_label.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop)
+                    about_label.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)  # Allows text selection
 
-                # Layout for README content and SVG images
-                scroll_content_layout = QtWidgets.QVBoxLayout()
-                scroll_content_layout.addWidget(about_label)
+                    # Create SVG widgets for images
+                    gpl_svg_widget = QSvgWidget(r"assets\gpl-v3-logo.svg")
+                    gpl_svg_widget.setFixedSize(90, 90)
+                    pyqt_svg_widget = QSvgWidget(r"assets\Python_and_Qt.svg")
+                    pyqt_svg_widget.setFixedSize(85, 85)
 
-                # Horizontal layout for SVG images inside the scroll area
-                svg_layout = QtWidgets.QHBoxLayout()
-                svg_layout.addStretch()
-                svg_layout.addWidget(gpl_svg_widget)
-                svg_layout.addWidget(pyqt_svg_widget)
+                    # Layout for README content and SVG images
+                    scroll_content_layout = QtWidgets.QVBoxLayout()
+                    scroll_content_layout.addWidget(about_label)
 
-                # Add SVG layout to the scrollable area
-                scroll_content_layout.addLayout(svg_layout)
+                    # Horizontal layout for SVG images inside the scroll area
+                    svg_layout = QtWidgets.QHBoxLayout()
+                    svg_layout.addStretch()
+                    svg_layout.addWidget(gpl_svg_widget)
+                    svg_layout.addWidget(pyqt_svg_widget)
 
-                # Create a widget to hold the content inside the scroll area
-                scroll_content_widget = QtWidgets.QWidget()
-                scroll_content_widget.setLayout(scroll_content_layout)
+                    # Add SVG layout to the scrollable area
+                    scroll_content_layout.addLayout(svg_layout)
 
-                # Create a QScrollArea to make the content scrollable
-                scroll_area = QtWidgets.QScrollArea()
-                scroll_area.setWidgetResizable(True)  # Allow the content to resize with the window
-                scroll_area.setWidget(scroll_content_widget)
+                    # Create a widget to hold the content inside the scroll area
+                    scroll_content_widget = QtWidgets.QWidget()
+                    scroll_content_widget.setLayout(scroll_content_layout)
 
-                # Close button
-                close_button = QtWidgets.QPushButton("Close")
-                close_button.clicked.connect(self.close)
+                    # Create a QScrollArea to make the content scrollable
+                    scroll_area = QtWidgets.QScrollArea()
+                    scroll_area.setWidgetResizable(True)  # Allow the content to resize with the window
+                    scroll_area.setWidget(scroll_content_widget)
 
-                # Layout for the close button and version label
-                button_version_layout = QtWidgets.QHBoxLayout()
-                button_version_layout.addWidget(version_label)  # Version label on the left
-                button_version_layout.addStretch()
-                button_version_layout.addWidget(close_button)  # Close button on the right
+                    # Close button
+                    close_button = QtWidgets.QPushButton("Close")
+                    close_button.clicked.connect(self.close)
 
-                # Main layout for the dialog
-                main_layout = QtWidgets.QVBoxLayout()
-                main_layout.addWidget(scroll_area)  # Add the scrollable content
-                main_layout.addLayout(button_version_layout)  # Add version and close button layout
+                    # Layout for the close button and version label
+                    button_version_layout = QtWidgets.QHBoxLayout()
+                    button_version_layout.addWidget(version_label)  # Version label on the left
+                    button_version_layout.addStretch()
+                    button_version_layout.addWidget(close_button)  # Close button on the right
 
-                # Set the final layout
-                self.setLayout(main_layout)
+                    # Main layout for the dialog
+                    main_layout = QtWidgets.QVBoxLayout()
+                    main_layout.addWidget(scroll_area)  # Add the scrollable content
+                    main_layout.addLayout(button_version_layout)  # Add version and close button layout
 
-
+                    # Set the final layout
+                    self.setLayout(main_layout)
+                except Exception as e:
+                    critical(e, False)
 
         # Main entry point
         def main():
@@ -720,13 +885,4 @@ if True:
             main()
             print("exiting program...")
     except Exception as e:
-        unex_error_type = type(e).__name__
-        unex_error_code = error_codes.get(unex_error_type, "unknown")
-        print(f"Unexpected error occurred: {e}")
-        QtWidgets.QMessageBox.critical(
-                    None,
-                    "Unexpected Error",
-                    f"An unexpected error has occurred!\n\nError details:\ntype: '{unex_error_type}'\ncode: '{unex_error_code}'\ndetails: '{e}'",
-                )
-        traceback.print_exc()
-        sys.exit(1)
+        critical(e, False)
