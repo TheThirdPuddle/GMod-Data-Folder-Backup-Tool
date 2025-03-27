@@ -239,7 +239,7 @@ if True:
         else:
             build_type = "Python Build"
 
-        version = f"1.1.0-beta.1 ({build_type})"
+        version = f"1.1.0-beta.2 ({build_type})"
 
         # Print the result (optional)
         print(f"Running as: {build_type}")
@@ -283,7 +283,7 @@ if True:
                     f"type: {setting_error_type}\ncode: {setting_error_code}\ndetails: {str(json_error)}"
                 )
             except Exception as e:
-                print(f"Unexpected error loading settings: {general_error}")
+                print(f"Unexpected error loading settings: {e}")
                 critical(e, False)
 
         # Function to save settings to a JSON file
@@ -520,6 +520,13 @@ if True:
                 default_source_directory = r"C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\data"
                 default_dest_directory = (str(folderutils.get_documents_folder()) + r"\GMod Data Folder Backups")
 
+                self.default_backup_source = default_source_directory
+                self.default_backup_dest = default_dest_directory
+
+                self.default_restore_source = ""  # leave blank for user to choose backup
+                self.default_restore_dest = default_source_directory  # restoring into game folder
+
+
                 # Create a menu bar (using QMainWindow's menuBar method)
                 self.menu_bar = self.menuBar()
 
@@ -558,6 +565,10 @@ if True:
                 # Backup button
                 self.btn_backup = QtWidgets.QPushButton("Create Backup", self)
 
+                # Restore button (hidden initially)
+                self.btn_restore = QtWidgets.QPushButton("Restore Backup", self)
+                self.btn_restore.hide()
+
                 # Progress bar
                 self.progress_bar = QtWidgets.QProgressBar(self)
                 self.progress_bar.setValue(0)
@@ -569,6 +580,11 @@ if True:
                 # Checkbox to show log
                 self.show_log_checkbox = QtWidgets.QCheckBox("Show live log")
                 self.show_log_checkbox.setChecked(False)
+
+                # Mode selection dropdown
+                self.mode_label = QtWidgets.QLabel("Mode:")
+                self.mode_dropdown = QtWidgets.QComboBox(self)
+                self.mode_dropdown.addItems(["Backup", "Restore"])
 
                 # TextEdit for log display (hidden initially)
                 self.log_textedit = QtWidgets.QTextEdit(self)
@@ -592,6 +608,8 @@ if True:
                 options_layout = QtWidgets.QHBoxLayout()
                 options_layout.addWidget(self.btn_settings)
                 options_layout.addWidget(self.btn_backup)
+                options_layout.addWidget(self.btn_restore)  # Will be hidden unless in Restore mode
+
 
                 # Add source label and horizontal layout for input and button
                 layout.addWidget(self.label_source)
@@ -600,6 +618,12 @@ if True:
                 # Add destination label and horizontal layout for input and button
                 layout.addWidget(self.label_dest)
                 layout.addLayout(dest_layout)
+
+                # Mode selector layout
+                mode_layout = QtWidgets.QHBoxLayout()
+                mode_layout.addWidget(self.mode_label)
+                mode_layout.addWidget(self.mode_dropdown)
+                layout.addLayout(mode_layout)
 
                 # Add options layout (settings and create backup button)
                 layout.addLayout(options_layout)
@@ -619,9 +643,36 @@ if True:
                 self.btn_browse_dest.clicked.connect(self.browse_destination_folder)
                 self.btn_backup.clicked.connect(self.start_backup)
                 self.btn_settings.clicked.connect(self.open_settings)
+                self.btn_restore.clicked.connect(self.show_restore_warning)
+
 
                 # Connect checkbox to toggle visibility and resize
                 self.show_log_checkbox.stateChanged.connect(self.toggle_log_visibility)
+
+                self.mode_dropdown.currentIndexChanged.connect(self.switch_mode)
+
+            def run_restore(self):
+                QMessageBox.information(self, "Coming Soon", "Restore functionality is not yet implemented.")
+
+            def switch_mode(self):
+                selected_mode = self.mode_dropdown.currentText().lower()
+                if selected_mode == "backup":
+                    self.btn_backup.show()
+                    self.btn_restore.hide()
+                    self.label_source.setText("Source Folder (GMod Data):")
+                    self.label_dest.setText("Destination Folder for Backup:")
+                    self.input_source.setText(self.default_backup_source)
+                    self.input_dest.setText(self.default_backup_dest)
+                    self.btn_settings.setEnabled(True)
+                elif selected_mode == "restore":
+                    self.btn_backup.hide()
+                    self.btn_restore.show()
+                    self.label_source.setText("Backup Source (Zip or Folder):")
+                    self.label_dest.setText("Restore Target (GMod Data Folder):")
+                    self.input_source.setText(self.default_restore_source)
+                    self.input_dest.setText(self.default_restore_dest)
+                    self.btn_settings.setEnabled(False)
+
 
             def browse_source_folder(self):
                 print("Browsing for source folder...")
@@ -636,6 +687,43 @@ if True:
                 if folder:
                     print(f"Selected destination folder: {folder}")
                     self.input_dest.setText(folder)
+
+            def show_restore_warning(self):
+                print("Showing restore warning dialog...")
+                dialog = QDialog(self)
+                dialog.setWindowTitle("⚠️ Restore Warning (Early Beta)")
+
+                warning_text = QLabel(
+                    "You are about to restore a backup to your GMod `data` folder.\n\n"
+                    "⚠️ This process will **DELETE** the current contents of the `data` folder and replace them with the files from your selected backup.\n\n"
+                    "This feature is currently in **early beta** and may cause issues if interrupted (e.g., app crash, incomplete restore).\n\n"
+                    "Make sure:\n"
+                    "- GMod is fully closed\n"
+                    "- You’ve backed up the current data folder separately\n"
+                    "- You’ve selected the correct restore source and destination\n\n"
+                    "Only proceed if you understand the risks."
+                )
+                warning_text.setWordWrap(True)
+
+                restore_button = QPushButton("Restore Anyway (Proceed)", dialog)
+                cancel_button = QPushButton("Cancel", dialog)
+
+                button_box = QDialogButtonBox(QtCore.Qt.Horizontal)
+                button_box.addButton(restore_button, QDialogButtonBox.AcceptRole)
+                button_box.addButton(cancel_button, QDialogButtonBox.RejectRole)
+
+                cancel_button.clicked.connect(dialog.reject)
+                restore_button.clicked.connect(dialog.accept)
+
+                layout = QVBoxLayout(dialog)
+                layout.addWidget(warning_text)
+                layout.addWidget(button_box)
+
+                if dialog.exec_() == QDialog.Accepted:
+                    print("User confirmed restore. Proceeding to restoration...")
+                    self.run_restore()  # Stub for next phase
+                else:
+                    print("User canceled the restore operation.")
 
             def show_admin_warning(self):
                 try:
