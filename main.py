@@ -453,7 +453,7 @@ if True:
                 self.label_format_guide = QLabel("Use {date} for current date and {time} for current time.")
 
                 # Folder size restriction checkbox
-                self.size_restriction_checkbox = QCheckBox("folder size restriction (disabling this may cause the tool to crash if folder is larger than 1GB)", self)
+                self.size_restriction_checkbox = QCheckBox("Enforce 1 GB folder size limit (disable to allow larger folders).", self)
                 self.size_restriction_checkbox.setChecked(self.settings['size_restriction'])
 
                 # Logging option checkbox
