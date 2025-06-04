@@ -11,7 +11,7 @@
 you may need to run this app as an administrator to perform backups correctly. you don't need to, but it's recommended so you won't encounter problems when backing up
 
 if you are going to:
-* right clck on the executable, and press "Run as Administrator"
+* right click on the executable, and press "Run as Administrator"
 
 ---
 ### how to use:
