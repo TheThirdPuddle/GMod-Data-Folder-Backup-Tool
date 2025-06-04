@@ -705,7 +705,7 @@ if True:
                 )
                 warning_text.setWordWrap(True)
 
-                restore_button = QPushButton("Restore Anyway (Proceed)", dialog)
+                restore_button = QPushButton("Restore Anyway", dialog)
                 cancel_button = QPushButton("Cancel", dialog)
 
                 button_box = QDialogButtonBox(QtCore.Qt.Horizontal)
