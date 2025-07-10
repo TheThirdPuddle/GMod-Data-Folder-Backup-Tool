@@ -440,6 +440,87 @@ if True:
                     log_textedit.append(f"Error: {e}")
                 QMessageBox.critical(None, "Backup Error", f"Failed to create backup\n\nerror info:\ntype: {backupfail_error_type}\ncode: {backupfail_error_code}\ndetails: {str(e)}")
                 progress_bar.setValue(0)
+        def restore_backup(backup_folder, restore_target, progress_bar, log_textedit, show_log):
+            try:
+                print("Starting restore process...")
+                print(f"checking permissions for {restore_target}...")
+                # Dangerously critical system folders that should never be used as restore targets
+                PROTECTED_PATHS = [
+                    os.environ.get("SYSTEMROOT", r"C:\Windows"),
+                    r"C:\Windows",
+                    r"C:\Program Files",
+                    r"C:\Program Files (x86)",
+                    r"C:\Users",
+                    r"C:\.",  # root is too risky
+                    r"c:\test\path"
+                ]
+
+                def is_protected_path(path):
+                    abs_path = os.path.abspath(path).lower()
+                    for protected in PROTECTED_PATHS:
+                        protected_abs = os.path.abspath(protected).lower()
+                        if abs_path == protected_abs:
+                            return True  # Exact match (e.g. trying to restore directly into C:\Windows)
+                        if os.path.commonpath([abs_path, protected_abs]) == protected_abs and abs_path != protected_abs:
+                            # Only block immediate children, not deeper subfolders
+                            if os.path.relpath(abs_path, protected_abs).count(os.sep) == 0:
+                                return True
+
+                    return False
+                if is_protected_path(restore_target):
+                    raise PermissionError(f"{restore_target} is a protected system directory. Operation aborted.")
+                print(f"Backup folder: {backup_folder}")
+                print(f"Restore target: {restore_target}")
+
+                # Check if the backup source exists
+                if not os.path.exists(backup_folder):
+                    raise FileNotFoundError("Backup source does not exist.")
+
+                # Clear the restore target first
+                if os.path.exists(restore_target):
+                    shutil.rmtree(restore_target)
+                os.makedirs(restore_target, exist_ok=True)
+
+                # Count total files for progress tracking
+                total_files = sum(len(files) for _, _, files in os.walk(backup_folder))
+                files_copied = 0
+                progress_bar.setValue(0)
+                progress_bar.show()
+
+                if show_log:
+                    log_textedit.clear()
+                    log_textedit.show()
+
+                # Copy files from backup to destination
+                for root, dirs, files in os.walk(backup_folder):
+                    for dir in dirs:
+                        target_dir = os.path.join(restore_target, os.path.relpath(os.path.join(root, dir), backup_folder))
+                        os.makedirs(target_dir, exist_ok=True)
+                        if show_log:
+                            log_textedit.append(f"Created folder: {target_dir}")
+                            QtCore.QCoreApplication.processEvents()
+
+                    for file in files:
+                        src_file = os.path.join(root, file)
+                        dest_file = os.path.join(restore_target, os.path.relpath(src_file, backup_folder))
+                        shutil.copy2(src_file, dest_file)
+                        files_copied += 1
+                        progress = int((files_copied / total_files) * 100)
+                        progress_bar.setValue(progress)
+
+                        if show_log:
+                            log_textedit.append(f"Restored file: {src_file}")
+                            QtCore.QCoreApplication.processEvents()
+
+                QMessageBox.information(None, "Restore Success", "Backup has been successfully restored.")
+                progress_bar.setValue(0)
+
+            except Exception as e:
+                if show_log:
+                    log_textedit.append(f"Error: {e}")
+                progress_bar.setValue(0)
+                critical(e, True)
+
 
         # Settings Dialog
         class SettingsDialog(QDialog):
@@ -659,7 +740,16 @@ if True:
                 self.mode_dropdown.currentIndexChanged.connect(self.switch_mode)
 
             def run_restore(self):
-                QMessageBox.information(self, "Coming Soon", "Restore functionality is not yet implemented.")
+                backup_folder = self.input_source.text()
+                restore_target = self.input_dest.text()
+                show_log = self.show_log_checkbox.isChecked()
+
+                if not backup_folder or not restore_target:
+                    QMessageBox.warning(self, "Input Error", "Both backup and restore paths must be selected.")
+                    return
+
+                QtCore.QCoreApplication.processEvents()
+                restore_backup(backup_folder, restore_target, self.progress_bar, self.log_textedit, show_log)
 
             def switch_mode(self):
                 selected_mode = self.mode_dropdown.currentText().lower()
@@ -701,7 +791,8 @@ if True:
                 dialog.setWindowTitle("Warning")
 
                 warning_text = QLabel(
-                    "This feature is in early beta and is not confirmed to be fully safe! \n\n"
+                    "This feature is in early beta and is not confirmed to be fully safe! \n"
+                    "For safety, it is recommended to manually restore through the file manager itself.\n\n"
                     "This process will delete everything in './garrysmod/data/'\n"
                     "and replace them with your selected backup.\n\n"
                     "This action is permanent and CANNOT BE UNDONE!\n\n"
@@ -855,52 +946,51 @@ if True:
                     <h4>with additional help with ChatGPT for building the code (yes, I know, I'm lazy AF)</h4>
                     <hr>
 
-                    <h3>ABOUT THIS APP:</h3>
+                    <h3>About This App:</h3>
                     <ul>
-                    <li>This app will help you quickly and easily backup your GMod's <code>data</code> folder without digging through all of the files and folders.</li>
+                    <li>This app is made to reduce the amount of clicks to back up your Gmod's <code>data</code> folder down to 1 (Powered by PyQt5)</li>
                     </ul>
 
                     <hr>
 
-                    <h3>NOTICE:</h3>
+                    <h3>Notice:</h3>
+                    <p>You may need to run this app as an administrator to perform backups correctly. You don't need to, but it's recommended so you won't encounter problems when backing up.</p>
                     <ul>
-                    <li>You <strong>must</strong> run this application as Administrator in order to perform the backup, otherwise, it won't work correctly.</li>
-                    <li>If you are uncomfortable with this, then please <strong>do not</strong> run this tool.</li>
-                    <li>If you are okay with this though:</li>
-                    <ul>
-                        <li>Right click on <code>backup-gmod-data.exe</code>, and click on <strong>Run as administrator</strong>.</li>
-                    </ul>
+                    <li>Right-click on the executable, and press <strong>"Run as Administrator"</strong></li>
                     </ul>
 
                     <hr>
 
                     <h3>How to use:</h3>
                     <ol>
-                    <li>Run <code>backup-gmod-data.exe</code> as 'Administrator'</li>
+                    <li>Run <code>GMDFBT</code> as 'Administrator' (if you have to) (refer to the notice)</li>
                     <li>(optional) Select your GMod's <code>data</code> directory</li>
-                    <li>Select the folder you wish to backup the data to (e.g. <code>C:\Users\&lt;your username&gt;\Documents\gmod-data-folder-backups\</code>)</li>
-                    <li>Press <strong>Create backup</strong></li>
+                    <li>(optional) Select your backup directory</li>
+                    <li>Press <strong>Create backup</strong> (app may freeze during the process)</li>
                     <li>Close app once done</li>
                     </ol>
 
                     <hr>
 
                     <h3>Disclaimer:</h3>
-                    <p>This software is provided "as is", without any warranties or guarantees of any kind, either express or implied. By downloading and/or using this software, you acknowledge that it is new and may contain bugs or issues that could cause potential data and/or system destruction.</p>
-                    <p>We do <strong>not</strong> accept any liability for any data loss, damage, or corruption that may occur as a result of using this software, including during the backup process. You are solely responsible for any actions taken while using this software, and you agree to assume all associated risks.</p>
-                    <p>By proceeding with the download and use of this software, you agree to these terms and confirm that you understand the potential risks involved.</p>
+                    <p>This software is provided "as is", without any warranties, guarantees, or certainties of any kind, neither express, nor implied. By downloading and/or using this software, you acknowledge that it is a new software, and, as a result, may contain bugs or issues that could potentially cause harm to your data and/or system.</p>
+                    <p>We do <strong>not</strong> accept any liability for any data loss, damage, or corruption that may occur as a result of using this software, including during the backup process. <strong>You</strong> are required to take full responsibility for any actions from using this tool, and you agree to claim any and all potential risks.</p>
+                    <p>By proceeding with the download and use of this software, you agree to these terms above, and confirm that you understand the potential risks involved.</p>
 
                     <hr>
 
                     <h3>Software Credits:</h3>
                     <ul>
                     <li><strong>Thethirdpuddle</strong>: for the general idea of this software and most of the <code>README.md</code> contents.</li>
-                    <li><strong>ChatGPT</strong>: For help with building the code and refining the disclaimer.</li>
+                    <li><strong>ChatGPT</strong>: For help with building the code and refining the disclaimer. (don't ask why I used ChatGPT.)</li>
                     </ul>
 
-                    <!-- Extra space at the end -->
+                    <hr>
+                    <h4>Any questions? DM <strong>thethirdpuddle</strong> on Discord!</h4>
+
                     <div style="height: 50px;"></div>
                     """
+
 
                     # Create a QLabel to display the README contents
                     about_label = QtWidgets.QLabel(readme_content)
