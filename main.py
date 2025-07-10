@@ -102,7 +102,6 @@ DARK_THEME = """
     }
 
     QComboBox::down-arrow {
-        content: "▼";
         color: #FFFFFF;
         font-size: 10px;
     }
@@ -169,11 +168,12 @@ LIGHT_THEME = """
     }
 
     QComboBox::down-arrow {
-        content: "▼";
         color: #000000;
         font-size: 10px;
     }
 """
+
+
 
 
 # Error popups
@@ -228,10 +228,13 @@ if True:
         import traceback
         import zipfile
         import folderutils
+        import requests
         from PyQt5 import QtWidgets, QtCore
         from PyQt5.QtWidgets import QFileDialog, QMessageBox, QCheckBox, QLineEdit, QLabel, QPushButton, QVBoxLayout, QDialog, QDialogButtonBox
         from PyQt5.QtGui import QIcon
         from PyQt5.QtSvg import QSvgWidget
+        
+        rawVersion = f"1.1.0-beta.2"
 
         # Check if the script is running as a compiled binary
         if getattr(sys, 'frozen', False):
@@ -239,8 +242,10 @@ if True:
         else:
             build_type = "Python Build"
 
-        version = f"1.1.0-beta.2 ({build_type})"
-        rawVersion = f"1.1.0-beta.2"
+        version = f"{rawVersion} ({build_type})"
+        
+        
+
         # Print the result (optional)
         print(f"Running as: {build_type}")
         print(f"Version: {version}")
@@ -951,13 +956,36 @@ if True:
                 except Exception as e:
                     critical(e, False)
 
+
+
         # Main entry point
         def main():
             import sys
             print("Starting application...")
+
             app = QtWidgets.QApplication(sys.argv)
             window = BackupApp()
-
+            def check_for_updates_gui(rawVersion):
+                from PyQt5.QtWidgets import QMessageBox
+                try:
+                    url = "https://api.github.com/repos/TheThirdPuddle/GMod-Data-Folder-Backup-Tool/tags"
+                    response = requests.get(url, timeout=10)
+                    response.raise_for_status()
+                    tags = response.json()
+                    if tags:
+                        latest = tags[0]["name"]
+                        if latest != rawVersion:
+                            QMessageBox.information(window, "Update Available", f"An update is available!\n\nLatest: {latest}\nCurrent: {rawVersion}")
+                        else:
+                            print("You're up to date.")
+                    else:
+                        QMessageBox.warning(window, "Update Check Failed", "No tags found on the repository.")
+                except requests.RequestException:
+                    QMessageBox.warning(window, "Update Check Failed", "Could not check for updates.\nPlease try again later.")
+            
+            print("checking for updates...")
+            check_for_updates_gui(rawVersion)
+            
             # Check if arguments are passed (source folder and destination)
             if len(sys.argv) == 3:
                 source_folder = sys.argv[1]
