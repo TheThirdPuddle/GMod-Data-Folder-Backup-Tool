@@ -102,7 +102,6 @@ DARK_THEME = """
     }
 
     QComboBox::down-arrow {
-        content: "▼";
         color: #FFFFFF;
         font-size: 10px;
     }
@@ -169,11 +168,12 @@ LIGHT_THEME = """
     }
 
     QComboBox::down-arrow {
-        content: "▼";
         color: #000000;
         font-size: 10px;
     }
 """
+
+
 
 
 # Error popups
@@ -228,10 +228,13 @@ if True:
         import traceback
         import zipfile
         import folderutils
+        import requests
         from PyQt5 import QtWidgets, QtCore
         from PyQt5.QtWidgets import QFileDialog, QMessageBox, QCheckBox, QLineEdit, QLabel, QPushButton, QVBoxLayout, QDialog, QDialogButtonBox
         from PyQt5.QtGui import QIcon
         from PyQt5.QtSvg import QSvgWidget
+        
+        rawVersion = f"1.1.0-beta.2"
 
         # Check if the script is running as a compiled binary
         if getattr(sys, 'frozen', False):
@@ -239,7 +242,9 @@ if True:
         else:
             build_type = "Python Build"
 
-        version = f"1.1.0-beta.2 ({build_type})"
+        version = f"{rawVersion} ({build_type})"
+        
+        
 
         # Print the result (optional)
         print(f"Running as: {build_type}")
@@ -544,6 +549,8 @@ if True:
                 # Add actions to the help menu
                 self.about_action = QtWidgets.QAction("About", self)
                 self.help_menu.addAction(self.about_action)
+                self.changelog_action = QtWidgets.QAction("Changelog", self)
+                self.help_menu.addAction(self.changelog_action)
 
                 # Connect the About action to the about menu
                 self.about_action.triggered.connect(self.show_about_dialog)
@@ -691,21 +698,18 @@ if True:
             def show_restore_warning(self):
                 print("Showing restore warning dialog...")
                 dialog = QDialog(self)
-                dialog.setWindowTitle("⚠️ Restore Warning (Early Beta)")
+                dialog.setWindowTitle("Warning")
 
                 warning_text = QLabel(
-                    "You are about to restore a backup to your GMod `data` folder.\n\n"
-                    "⚠️ This process will **DELETE** the current contents of the `data` folder and replace them with the files from your selected backup.\n\n"
-                    "This feature is currently in **early beta** and may cause issues if interrupted (e.g., app crash, incomplete restore).\n\n"
-                    "Make sure:\n"
-                    "- GMod is fully closed\n"
-                    "- You’ve backed up the current data folder separately\n"
-                    "- You’ve selected the correct restore source and destination\n\n"
-                    "Only proceed if you understand the risks."
+                    "This feature is in early beta and is not confirmed to be fully safe! \n\n"
+                    "This process will delete everything in './garrysmod/data/'\n"
+                    "and replace them with your selected backup.\n\n"
+                    "This action is permanent and CANNOT BE UNDONE!\n\n"
+                    "Only proceed if you understand these risks!"
                 )
                 warning_text.setWordWrap(True)
 
-                restore_button = QPushButton("Restore Anyway (Proceed)", dialog)
+                restore_button = QPushButton("Restore Anyway", dialog)
                 cancel_button = QPushButton("Cancel", dialog)
 
                 button_box = QDialogButtonBox(QtCore.Qt.Horizontal)
@@ -952,13 +956,36 @@ if True:
                 except Exception as e:
                     critical(e, False)
 
+
+
         # Main entry point
         def main():
             import sys
             print("Starting application...")
+
             app = QtWidgets.QApplication(sys.argv)
             window = BackupApp()
-
+            def check_for_updates_gui(rawVersion):
+                from PyQt5.QtWidgets import QMessageBox
+                try:
+                    url = "https://api.github.com/repos/TheThirdPuddle/GMod-Data-Folder-Backup-Tool/tags"
+                    response = requests.get(url, timeout=10)
+                    response.raise_for_status()
+                    tags = response.json()
+                    if tags:
+                        latest = tags[0]["name"]
+                        if latest != rawVersion:
+                            QMessageBox.information(window, "Update Available", f"An update is available!\n\nLatest: {latest}\nCurrent: {rawVersion}")
+                        else:
+                            print("You're up to date.")
+                    else:
+                        QMessageBox.warning(window, "Update Check Failed", "No tags found on the repository.")
+                except requests.RequestException:
+                    QMessageBox.warning(window, "Update Check Failed", "Could not check for updates.\nPlease try again later.")
+            
+            print("checking for updates...")
+            check_for_updates_gui(rawVersion)
+            
             # Check if arguments are passed (source folder and destination)
             if len(sys.argv) == 3:
                 source_folder = sys.argv[1]
