@@ -240,7 +240,7 @@ if True:
             build_type = "Python Build"
 
         version = f"1.1.0-beta.2 ({build_type})"
-
+        rawVersion = f"1.1.0-beta.2"
         # Print the result (optional)
         print(f"Running as: {build_type}")
         print(f"Version: {version}")
@@ -544,6 +544,8 @@ if True:
                 # Add actions to the help menu
                 self.about_action = QtWidgets.QAction("About", self)
                 self.help_menu.addAction(self.about_action)
+                self.changelog_action = QtWidgets.QAction("Changelog", self)
+                self.help_menu.addAction(self.changelog_action)
 
                 # Connect the About action to the about menu
                 self.about_action.triggered.connect(self.show_about_dialog)
@@ -691,17 +693,14 @@ if True:
             def show_restore_warning(self):
                 print("Showing restore warning dialog...")
                 dialog = QDialog(self)
-                dialog.setWindowTitle("⚠️ Restore Warning (Early Beta)")
+                dialog.setWindowTitle("Warning")
 
                 warning_text = QLabel(
-                    "You are about to restore a backup to your GMod `data` folder.\n\n"
-                    "⚠️ This process will **DELETE** the current contents of the `data` folder and replace them with the files from your selected backup.\n\n"
-                    "This feature is currently in **early beta** and may cause issues if interrupted (e.g., app crash, incomplete restore).\n\n"
-                    "Make sure:\n"
-                    "- GMod is fully closed\n"
-                    "- You’ve backed up the current data folder separately\n"
-                    "- You’ve selected the correct restore source and destination\n\n"
-                    "Only proceed if you understand the risks."
+                    "This feature is in early beta and is not confirmed to be fully safe! \n\n"
+                    "This process will delete everything in './garrysmod/data/'\n"
+                    "and replace them with your selected backup.\n\n"
+                    "This action is permanent and CANNOT BE UNDONE!\n\n"
+                    "Only proceed if you understand these risks!"
                 )
                 warning_text.setWordWrap(True)
 
